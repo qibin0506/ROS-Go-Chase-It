@@ -64,10 +64,10 @@ void process_image_callback(const sensor_msgs::Image image) {
 
 		if (max == left_count) {
 			// drive left
-			drive_bot(0, -angular_z);
+			drive_bot(0, angular_z);
 		} else if (max == right_count) {
 			// drive right
-			drive_bot(0, angular_z);
+			drive_bot(0, -angular_z);
 		} else {
 			// drive front
 			drive_bot(linear_x, 0);
