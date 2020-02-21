@@ -33,9 +33,6 @@ void process_image_callback(const sensor_msgs::Image image) {
 	int right_count = 0;
 	int front_count = 0;
 
-	int left_area = image.width / 3;
-	int front_area = left_area * 2;
-
 	for (int i = 0; i < image.height * image.step; i += 3) {
 		int pixel_idx = i % (image.width * 3) / 3;
 		int center = image.step / 2;
@@ -48,17 +45,16 @@ void process_image_callback(const sensor_msgs::Image image) {
 			continue;
 		}
 		
-		if (pixel_idx <= left_area) {
+		if (pixel_idx <= 265) {
 			left_count++;		
-		} else if (pixel_idx <= front_area) {
+		} else if (pixel_idx > 265 && pixel_idx <= 533) {
 			front_count++;
-		} else {
+		} else if (pixel_idx > 533) {
 			right_count++;
 		}
 	}
 
 	if (left_count == 0 && right_count == 0 && front_count == 0) {
-		ROS_INFO("stop");
 		drive_bot(0, 0);
 	} else {
 		std::vector<int> counts{left_count, right_count, front_count};

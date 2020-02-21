@@ -23,7 +23,7 @@ int main(int argc, char** argv) {
 	ros::init(argc, argv, "drive_bot");
 	ros::NodeHandle n;
 
-	motor_command_publisher = n.advertise<geometry_msgs::Twist>("/cmd_vec", 10);
+	motor_command_publisher = n.advertise<geometry_msgs::Twist>("/cmd_vel", 10);
 	ros::ServiceServer server = n.advertiseService("/ball_chaser/command_robot", handle_drive_request);
 
 	ros::spin();
